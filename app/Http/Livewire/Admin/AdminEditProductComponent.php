@@ -52,7 +52,7 @@ class AdminEditProductComponent extends Component
     }
      public function updated($fields)
     {
-        $this->validate([
+        $this->validateOnly($fields,[
             "name"=>"required",
             "slug"=>"required|unique:products",
             "short_description"=>"required",
@@ -63,7 +63,7 @@ class AdminEditProductComponent extends Component
             "stock_status"=>"required",
             "quantity"=>"required|numeric",
             "newimage"=>"required|mimes:jpeg,png",
-            "category_id"=>'required',
+            "category_id"=>"required",
             
         ]);
     }
@@ -81,7 +81,7 @@ class AdminEditProductComponent extends Component
             "stock_status"=>"required",
             "quantity"=>"required|numeric",
             "newimage"=>"required|mimes:jpeg,png",
-            "category_id"=>'required',
+            "category_id"=>"required",
         ]);
         $product = Product::find($this->product_id);
         $product->name = $this->name;

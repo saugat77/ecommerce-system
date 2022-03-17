@@ -36,7 +36,7 @@ class AdminAddProductComponent extends Component
     }
     public function updated($fields)
     {
-        $this->validate([
+        $this->validateOnly($fields,[
             "name"=>"required",
             "slug"=>"required|unique:products",
             "short_description"=>"required",
@@ -46,8 +46,9 @@ class AdminAddProductComponent extends Component
             "SKU"=>"required",
             "stock_status"=>"required",
             "quantity"=>"required|numeric",
-            "image"=>"required|mines:jpeg,png",
-            "category_id"=>'required',
+            "image"=>"required|mimes:jpeg,png",
+            "category_id"=>"required",
+            
         ]);
     }
     public function addProduct()
@@ -62,8 +63,8 @@ class AdminAddProductComponent extends Component
             "SKU"=>"required",
             "stock_status"=>"required",
             "quantity"=>"required|numeric",
-            "image"=>"required|mines:jpeg,png",
-            "category_id"=>'required',
+            "image"=>"required|mimes:jpeg,png",
+            "category_id"=>"required",
         ]);
         $product = new Product();
         $product->name = $this->name;
