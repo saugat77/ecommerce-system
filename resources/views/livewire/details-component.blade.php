@@ -47,7 +47,7 @@
                         <div class="wrap-social">
                             <a class="link-socail" href="#"><img src="{{ asset('assets/images/social-list.png')}}" alt=""></a>
                         </div>
-                            @if ($ product->sale_price > 0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
+                            @if ($product->sale_price > 0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
                                  <div class="wrap-price">
                                      <span class="product-price">{{$product->sale_price}}</span>
                                      <del><span class="product-price regprice">${{$product->regular_price}}</span></del>
@@ -70,9 +70,9 @@
                         </div>
                         <div class="wrap-butons">
                             @if ($product->sale_price > 0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
-                            <a href="#" class="btn add-to-cart"wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->sale_price}})">Add to Cart</a>
+                            <a href="#" class="btn add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->sale_price}})">Add to Cart</a>
                             @else
-                            <a href="#" class="btn add-to-cart"wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Add to Cart</a>
+                            <a href="#" class="btn add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Add to Cart</a>
                             @endif
                             <div class="wrap-btn">
                                 <a href="#" class="btn btn-compare">Add Compare</a>
@@ -121,7 +121,7 @@
                                                         </div>
                                                         <p class="meta"> 
                                                             <strong class="woocommerce-review__author">admin</strong> 
-                                                            <span class="woocommerce-review__dash">–php php</span>
+                                                            <span class="woocommerce-review__dash">php php</span>
                                                             <time class="woocommerce-review__published-date" datetime="2008-02-14 20:00" >Tue, Aug 15,  2017</time>
                                                         </p>
                                                         <div class="description">
