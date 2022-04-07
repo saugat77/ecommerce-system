@@ -2,6 +2,7 @@
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CheckoutComponent;
+use App\Http\Livewire\ShippingComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\ShopComponent;
@@ -9,6 +10,7 @@ use App\Http\Livewire\WishlistComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\SearchComponent;
+use App\Http\Livewire\ThankyouComponent;
 use App\Http\Livewire\Admin\AdminCategoryComponent;
 use App\Http\Livewire\Admin\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\AdminEditCategoryComponent;
@@ -40,7 +42,7 @@ Route::get('/', HomeComponent::class);
 
 Route::get('/cart', CartComponent::class)->name('product.cart');
 
-Route::get('/checkout', CheckoutComponent::class);
+Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 
 Route::get('/shop', ShopComponent::class);
 
@@ -74,5 +76,7 @@ Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function(){
 
     Route::get('/admin/home-categories',AdminHomeCategoryComponent::class)->name('admin.homecategories');
     Route::get('/admin/sale',AdminSaleComponent::class)->name('admin.sale');
+    Route::get('/shipping',ShippingComponent::class)->name('shipping');
+    Route::get('/thank-you',ThankyouComponent::class)->name('thankyou');
 });
 

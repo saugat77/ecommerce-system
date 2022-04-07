@@ -33,6 +33,25 @@ class CartComponent extends Component
         Cart::instance('cart')->destroy();
           $this->emitTo('cart-count-component','refreshComponent');
     }
+    public function checkout()
+    {
+    if(Auth::check())
+    {
+        return redirect()->route('checkout');
+    }
+    else{
+        return redirect()->route('login');
+    }
+    }
+    public function setAmountForCheckout()
+    {
+       session()->put('checkout',[
+           'discount'=>0,
+           'subtotal'=>Cart::instance('cart')->subtotal(),
+            'tax'=>Cart::instance('cart')->tax(),
+            'total'=>Cart::instance('cart')->total()
+       ]);
+    }
     public function render()
     {
 
@@ -40,6 +59,7 @@ class CartComponent extends Component
         {
             Cart::instance('cart')->store(Auth::user()->email);
         }
+        $this->setAmountForCheckout();
         return view('livewire.cart-component')->layout('layouts.base');
     }
 }
