@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use Cart;
+
 use App\Models\Order;
+use Cart;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CheckoutComponent extends Component
 {
-    public $ship_to_different;
+    
     
     public $firstname;
     public $lastname;
@@ -23,6 +24,7 @@ class CheckoutComponent extends Component
     public $zipcode;
 
     public $paymentmode;
+    public $thankyou;
 
     public function updated($fields)
     {
@@ -37,6 +39,24 @@ class CheckoutComponent extends Component
             'country'=> 'required',
             'zipcode'=> 'required',
             'paymentmode'=>'required',
+        ]);
+      
+   
+    }
+
+    public function placeOrder()
+    {
+        $this->validate([
+           'firstname' => 'required',
+           'lastname'=> 'required',
+           'email' => 'required|email',
+           'mobile' => 'required|numeric',
+           'line1' => 'required',
+           'city' => 'required',
+           'province' => 'required',
+           'country' => 'required',
+           'zipcode' => 'required',
+           'paymentmode' => 'required',
         ]);
         $order = new Order();
         $order->user_id = Auth::user()->id;
@@ -55,8 +75,7 @@ class CheckoutComponent extends Component
         $order->zipcode= $this->zipcode;
         $order->status = 'ordered';
         $order->save();
-
-        foreach(Cart::instance('cart')->content()as $item)
+        foreach(Cart::instance('cart')->content() as $item)
         {
             $orderItem = new OrderItem();
             $orderItem->product_id = $item->id;
@@ -65,24 +84,9 @@ class CheckoutComponent extends Component
             $orderItem->quantity = $item->qty;
             $orderItem->save();
         }
-    }
 
-    public function placeOrder()
-    {
-        $this->validate([
-           'firstname' => 'required',
-           'lastname'=> 'required',
-           'email'=> 'required|email',
-           'mobile'=> 'required|numeric',
-           'line1'=> 'required',
-           
-           'city'=> 'required',
-           'province'=> 'required',
-           'country'=> 'required',
-           'zipcode'=> 'required',
-           'paymentmode'=>'required',
-        ]);
-        if($this->paymentmode == 'cod'){
+        if($this->paymentmode == 'cod')
+        {
             $transaction = new Transaction();
             $transaction-> user_id = Auth::user()->id;
             $transaction->order_id = $order->id;
@@ -90,11 +94,30 @@ class CheckoutComponent extends Component
             $transaction->status = 'pending';
             $transaction->save();
         }
+        $this->thankyou = 1;
         Cart::instance('cart')->destroy();
         session()->forget('checkout');
     }
+
+    public function verifyForCheckout()
+    {
+    if(!Auth::check())
+    {
+        return redirect()->route('login');
+    }
+    else if($this->thankyou)
+    {
+        return redirect()->route('thankyou');
+    }
+        else if(!session()->get('checkout'))
+        {
+            return redirect()->route('product.cart');
+        }
+
+    }
     public function render()
     {
+        $this->verifyForCheckout();
         return view('livewire.checkout-component')->layout('layouts.base');
     }
 }

@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('mobile');
             $table->string('email');
             $table->string('line1')->nullable();
+            $table->string('line2')->nullable();
             $table->string('city');
             $table->string('province');
             $table->string('country');
