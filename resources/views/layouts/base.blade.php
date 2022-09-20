@@ -4,18 +4,18 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Home</title>	
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset ('assets/images/favicon.ico') }}">
+	<title>Home</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/assets/images/favicon.ico') }}">
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open%20Sans:300,400,400italic,600,600italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/owl.carousel.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/flexslider.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color-01.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/animate.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/owl.carousel.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/flexslider.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/chosen.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/style.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/color-01.css')}}">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -49,7 +49,7 @@
 							@if(Route::has('login'))
 							@auth
 							@if(Auth::user()->utype === 'ADM')
-							
+
 								<ul>
 									<li class="menu-item lang-menu menu-item-has-children parent">
 										<a title="My Account" href="#">Admin ({{Auth::user()->name}})</a>
@@ -73,32 +73,32 @@
 											<li class="menu-item" >
 												<a href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-submit').submit();">Logout</a></li>
 												<form id="logout-submit" method="POST" action="{{ route('logout')}}">
-													@csrf  
+													@csrf
 												</form>
 										</ul></li>
 										</ul>
-							
-						 
+
+
 							@else
 							<ul>
-									
+
 								<li class="menu-item lang-menu menu-item-has-children parent">
 									<a title="My Account" href="#">My account ({{Auth::user()->name}})</a>
 									<ul class="submenu lang" >
 										<li class="menu-item"><a title="Dashboard" href="{{ route('user.dashboard')}}">Dashboard</a></li>
 
 
-									
+
 
 										<li class="menu-item" >
 											<a href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-submit').submit();">Logout</a></li>
 											<form id="logout-submit" method="POST" action="{{ route('logout')}}">
-												@csrf  
+												@csrf
 											</form>
 										</ul>
 								         </li>
 									</ul>
-							
+
 						 @endif
 							@else
 							<ul>
@@ -106,7 +106,7 @@
 							  <li class="menu-item" ><a title="Register or Login" href="{{route('register')}}">Register</a></li></ul>
 							@endif
 						  @endif
-							
+
 						</div>
 					</div>
 				</div>
@@ -134,7 +134,7 @@
 					</div>
 				</div>
 
-			
+
 
 					<div class="primary-nav-section">
 						<div class="container">
@@ -156,7 +156,7 @@
 								</li>
 								<li class="menu-item">
 									<a href="contact-us.html" class="link-term mercado-item-title">Contact Us</a>
-								</li>																	
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -233,7 +233,7 @@
 											<li>
 												<i class="fa fa-envelope" aria-hidden="true"></i>
 												<p class="contact-txt">Contact@yourcompany.com</p>
-											</li>											
+											</li>
 										</ul>
 									</div>
 								</div>
@@ -408,10 +408,10 @@
 					<div class="coppy-right-item item-right">
 						<div class="wrap-nav horizontal-nav">
 							<ul>
-								<li class="menu-item"><a href="about-us.html" class="link-term">About us</a></li>								
+								<li class="menu-item"><a href="about-us.html" class="link-term">About us</a></li>
 								<li class="menu-item"><a href="privacy-policy.html" class="link-term">Privacy Policy</a></li>
 								<li class="menu-item"><a href="terms-conditions.html" class="link-term">Terms & Conditions</a></li>
-								<li class="menu-item"><a href="return-policy.html" class="link-term">Return Policy</a></li>								
+								<li class="menu-item"><a href="return-policy.html" class="link-term">Return Policy</a></li>
 							</ul>
 						</div>
 					</div>
@@ -420,16 +420,16 @@
 			</div>
 		</div>
 	</footer>
-	
-	<script src="{{ asset ('assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
-	<script src="{{ asset ('assets/js/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
-	<script src="{{ asset ('assets/js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset ('assets/js/jquery.flexslider.js') }}"></script>
-	{{--<script src="{{ asset ('assets/js/chosen.jquery.min.js') }}"></script>--}}
-	<script src="{{ asset ('assets/js/owl.carousel.min.js') }}"></script>
-	<script src="{{ asset ('assets/js/jquery.countdown.min.js') }}"></script>
-	<script src="{{ asset ('assets/js/jquery.sticky.js') }}"></script>
-	<script src="{{ asset ('assets/js/functions.js') }}"></script>
+
+	<script src="{{ asset('assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
+	<script src="{{ asset('assets/js/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
+	<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('assets/js/jquery.flexslider.js') }}"></script>
+	{{--<script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script>--}}
+	<script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+	<script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
+	<script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
+	<script src="{{ asset('assets/js/functions.js') }}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha512-GDey37RZAxFkpFeJorEUwNoIbkTwsyC736KNSYucu1WJWFK9qTdzYub8ATxktr6Dwke7nbFaioypzbDOQykoRg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
