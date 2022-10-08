@@ -10,7 +10,7 @@
                 <li class="item-link"><span>Checkout</span></li>
             </ul>
         </div>
-            <div class=" main-content-area">
+            <div class="main-content-area">
                 <form wire:submit.prevent="placeOrder">
                     <div class="row">
                         <div class="col-md-12">
@@ -19,23 +19,23 @@
                                 <div class="billing-address">
                                     <p class="row-in-form">
                                         <label for="fname">first name<span>*</span></label>
-                                        <input  type="text" name="fname" value="" placeholder="Your name" wire:model="firstname">
+                                        <input  type="text" name="fname" value="" placeholder="Your name" wire:model="firstname" required>
                                         @error('firstname')<span class="text-danger">{{$message}}</span>@enderror
                                     </p>
                                     <p class="row-in-form">
                                         <label for="lname">last name<span>*</span></label>
-                                        <input  type="text" name="lname" value="" placeholder="Your last name" wire:model="lastname">
+                                        <input  type="text" name="lname" value="" placeholder="Your last name" wire:model="lastname" required>
                                         @error('lastname')<span class="text-danger">{{$message}}</span>@enderror
                                     
                                     </p>
                                     <p class="row-in-form">
                                         <label for="email">Email Addreess:</label>
-                                        <input  type="email" name="email" value="" placeholder="Type your email" wire:model="email">
+                                        <input  type="email" name="email" value="{{Auth::user()->email}}" placeholder="Type your email" wire:model="email" required>
                                         @error('email')<span class="text-danger">{{$message}}</span>@enderror
                                     </p>
                                     <p class="row-in-form">
                                         <label for="phone">Phone number<span>*</span></label>
-                                        <input  type="number" name="phone" value="" placeholder="10 digits format" wire:model="mobile">
+                                        <input  type="number" name="phone" value="" placeholder="10 digits format" wire:model="mobile" required>
                                         @error('mobile')<span class="text-danger">{{$message}}</span>@enderror
                                     </p>
                                     <p class="row-in-form">
@@ -49,23 +49,23 @@
                                     </p>
                                     <p class="row-in-form">
                                         <label for="country">Country<span>*</span></label>
-                                        <input  type="text" name="country" value="" placeholder="Nepal" wire:model="country">
+                                        <input  type="text" name="country" value="" placeholder="Nepal" wire:model="country" required>
                                         @error('country')<span class="text-danger">{{$message}}</span>@enderror
                                     </p>
                                 
                                     <p class="row-in-form">
                                         <label for="city">Province<span>*</span></label>
-                                        <input  type="text" name="province" value="" placeholder="province" wire:model="province">
+                                        <input  type="text" name="province" value="" placeholder="province" wire:model="province" required>
                                         @error('province')<span class="text-danger">{{$message}}</span>@enderror
                                     </p>
                                     <p class="row-in-form">
                                         <label for="city">Town / City<span>*</span></label>
-                                        <input  type="text" name="city" value="" placeholder="City name" wire:model="city">
+                                        <input  type="text" name="city" value="" placeholder="City name" wire:model="city" required>
                                         @error('city')<span class="text-danger">{{$message}}</span>@enderror
                                     </p>
                                     <p class="row-in-form">
                                         <label for="zip-code">Postcode / ZIP:</label>
-                                        <input  type="number" name="zip-code" value="" placeholder="Your postal code" wire:model="zipcode">
+                                        <input  type="number" name="zip-code" value="" placeholder="Your postal code" wire:model="zipcode" required>
                                         @error('zipcode')<span class="text-danger">{{$message}}</span>@enderror
                                     </p>                          
                                 </div>
@@ -82,28 +82,26 @@
                         <p class="summary-info"><span class="title">Check / Money order</span></p>
                         <p class="summary-info"><span class="title">Credit Cart (saved)</span></p>
                         <div class="choose-payment-methods" >
+                            @if (Session::has('checkout'))
+                            <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{Session::get('checkout')['total']}}</span></p>
+                            @endif 
                             <label class="payment-method" >
                                 <input name="payment-method" id="payment-method-bank" value="cod" type="checkbox">
-                                <span>Cash on Delivery <a>( click the radio button to order )</a></span>
-                                <span class="payment-desc"> Order now Pay on delivery</span>
-                                <div id="cod">
-                                @if (Session::has('checkout'))
-
-                                <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{Session::get('checkout')['total']}}</span></p>
-                                <button  type="submit"  class="btn btn-medium"> <a href="#">Place order now</a> </button>   
-                                @endif   
-                            </div>
-                            {{-- <script>
+                                <span>Cash on Delivery</span>
+                                <div id="cod" style="display: none">
+                                <button  type="submit"  class="btn btn-checkout">Place order now</button>   
+                                 </div>
+                            <script>
                                 $().ready(function(){
                                  $("#payment-method-bank").on("click",function() {
                                     $("#cod").toggle(this.checked);
                                 });
                             });
-                            </script> --}}
+                            </script>
                             </label>
                             <label class="payment-method">
                                 <input name="payment-method"  id="payment-method-visa" value="card" type="checkbox">
-                                <span>Paypal</span>
+                                <span>Pay with paypal</span>
                                 <span class="payment-desc">Pay with paypal account</span>
                             </label>
                             @error('paymentmode')<span class="text-danger">{{$message}}</span>@enderror
@@ -152,46 +150,59 @@
                               }).render('#paypal-button-container');
                             </script>
                              <!-- Place this where you need payment button -->
-    <button id="payment-button">Pay with Khalti</button>
-    <!-- Place this where you need payment button -->
-    <!-- Paste this code anywhere in you body tag -->
-    <script>
-        var config = {
-            // replace the publicKey with yours
-            "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
-            "productIdentity": "1234567890",
-            "productName": "Dragon",
-            "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
-            "paymentPreference": [
-                "KHALTI",
-                "EBANKING",
-                "MOBILE_BANKING",
-                "CONNECT_IPS",
-                "SCT",
-                ],
-            "eventHandler": {
-                onSuccess (payload) {
-                    // hit merchant api for initiating verfication
-                    console.log(payload);
-                },
-                onError (error) {
-                    console.log(error);
-                },
-                onClose () {
-                    console.log('widget is closing');
-                }
-            }
-        };
-
-        var checkout = new KhaltiCheckout(config);
-        var btn = document.getElementById("payment-button");
-        btn.onclick = function () {
-            // minimum transaction amount must be 10, i.e 1000 in paisa.
-            checkout.show({amount: {{Session::get('checkout')['total']}}});
-        }
-    </script>
-    <!-- Paste this code anywhere in you body tag -->
-                          </body>
+                             <div>
+                                <input name="khalti" type="checkbox" id="khalti">
+                                <label for=""> 
+                                    Pay with khalti
+                                </label>
+                             </div>
+                             <script>
+                                $(function() {
+                                $("#khalti").on("click",function() {
+                                    $("#payment-button").toggle(this.checked);
+                                });
+                               
+                                });
+                        </script>
+                        <button id="payment-button" class="btn btn-default" style="display: none">Pay with Khalti</button>
+                        <!-- Place this where you need payment button -->
+                        <!-- Paste this code anywhere in you body tag -->
+                        <script>
+                            var config = {
+                                // replace the publicKey with yours
+                                "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
+                                "productIdentity": "1234567890",
+                                "productName": "Dragon",
+                                "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+                                "paymentPreference": [
+                                    "KHALTI",
+                                    "EBANKING",
+                                    "MOBILE_BANKING",
+                                    "CONNECT_IPS",
+                                    "SCT",
+                                    ],
+                                "eventHandler": {
+                                    onSuccess (payload) {
+                                        // hit merchant api for initiating verfication
+                                        console.log(payload);
+                                    },
+                                    onError (error) {
+                                        console.log(error);
+                                    },
+                                    onClose () {
+                                        console.log('widget is closing');
+                                    }
+                                }
+                            };
+                    
+                            var checkout = new KhaltiCheckout(config);
+                            var btn = document.getElementById("payment-button");
+                            btn.onclick = function () {
+                                // minimum transaction amount must be 10, i.e 1000 in paisa.
+                                checkout.show({amount: {{Session::get('checkout')['total'] * 100}}});
+                            }
+                        </script>      
+     </body>
         </form>
           
 

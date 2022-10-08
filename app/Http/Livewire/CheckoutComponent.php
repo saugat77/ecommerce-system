@@ -25,7 +25,6 @@ class CheckoutComponent extends Component
     public $province;
     public $country;
     public $zipcode;
-
     public $paymentmode;
     public $thankyou;
 
@@ -33,7 +32,6 @@ class CheckoutComponent extends Component
 
     public function placeOrder()
     {
-       
         $order = new Order();
         $order->user_id = Auth::user()->id;
         $order->subtotal = session()->get('checkout')['subtotal'];
@@ -56,7 +54,7 @@ class CheckoutComponent extends Component
             $orderItem = new OrderItem();
             $orderItem->product_id = $item->id;
             $orderItem->order_id = $order->id;
-            $orderItem->price = $item->price;
+            // $orderItem->price = $item->price;
             $orderItem->quantity = $item->qty;
             $orderItem->save();
         }
