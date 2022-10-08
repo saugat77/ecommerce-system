@@ -1,6 +1,7 @@
 <!--main area-->
 <main id="main" class="main-site">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
     <div class="container">
 
         <div class="wrap-breadcrumb">
@@ -80,27 +81,43 @@
                         <h4 class="title-box">Payment Method</h4>
                         <p class="summary-info"><span class="title">Check / Money order</span></p>
                         <p class="summary-info"><span class="title">Credit Cart (saved)</span></p>
-                        <div class="choose-payment-methods">
-                            <label class="payment-method">
-                                <input name="payment-method" id="payment-method-bank" value="cod" type="radio" wire:model = "paymentmode">
+                        <div class="choose-payment-methods" >
+                            <label class="payment-method" >
+                                <input name="payment-method" id="payment-method-bank" value="cod" type="checkbox">
                                 <span>Cash on Delivery <a>( click the radio button to order )</a></span>
                                 <span class="payment-desc"> Order now Pay on delivery</span>
+                                <div id="cod">
                                 @if (Session::has('checkout'))
 
                                 <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{Session::get('checkout')['total']}}</span></p>
-                                @endif   
                                 <button  type="submit"  class="btn btn-medium"> <a href="#">Place order now</a> </button>   
+                                @endif   
+                            </div>
+                            {{-- <script>
+                                $().ready(function(){
+                                 $("#payment-method-bank").on("click",function() {
+                                    $("#cod").toggle(this.checked);
+                                });
+                            });
+                            </script> --}}
                             </label>
                             <label class="payment-method">
-                                <input name="payment-method"  id="payment-method-visa" value="card" type="radio">
+                                <input name="payment-method"  id="payment-method-visa" value="card" type="checkbox">
                                 <span>Paypal</span>
                                 <span class="payment-desc">Pay with paypal account</span>
                             </label>
                             @error('paymentmode')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                       
-                   
-                        <div id="paypal-button-container"></div>
+                        <script>
+                                $(function() {
+                                $("#payment-method-visa").on("click",function() {
+                                    $("#paypal-button-container").toggle(this.checked);
+                                });
+                               
+                                });
+                        </script>
+                        <div id="paypal-button-container" style="display: none"></div>
 
                         <body>
                             <!-- Replace "test" with your own sandbox Business account app client ID -->
@@ -134,6 +151,46 @@
                                 }
                               }).render('#paypal-button-container');
                             </script>
+                             <!-- Place this where you need payment button -->
+    <button id="payment-button">Pay with Khalti</button>
+    <!-- Place this where you need payment button -->
+    <!-- Paste this code anywhere in you body tag -->
+    <script>
+        var config = {
+            // replace the publicKey with yours
+            "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
+            "productIdentity": "1234567890",
+            "productName": "Dragon",
+            "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+            "paymentPreference": [
+                "KHALTI",
+                "EBANKING",
+                "MOBILE_BANKING",
+                "CONNECT_IPS",
+                "SCT",
+                ],
+            "eventHandler": {
+                onSuccess (payload) {
+                    // hit merchant api for initiating verfication
+                    console.log(payload);
+                },
+                onError (error) {
+                    console.log(error);
+                },
+                onClose () {
+                    console.log('widget is closing');
+                }
+            }
+        };
+
+        var checkout = new KhaltiCheckout(config);
+        var btn = document.getElementById("payment-button");
+        btn.onclick = function () {
+            // minimum transaction amount must be 10, i.e 1000 in paisa.
+            checkout.show({amount: {{Session::get('checkout')['total']}}});
+        }
+    </script>
+    <!-- Paste this code anywhere in you body tag -->
                           </body>
         </form>
           
