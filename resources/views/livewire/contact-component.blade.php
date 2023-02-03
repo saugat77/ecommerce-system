@@ -43,11 +43,11 @@
                                     <p class="text-danger">{{message}}</p>
                                 @enderror
 									<input type="submit" name="ok" value="Submit" >
-									
+
 								</form>
 							</div>
-                     
-                                
+
+
 						</div>
 						<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 							<div class="contact-box contact-info">
@@ -78,7 +78,7 @@
 										<i class="fa fa-envelope" aria-hidden="true"></i>
 										<div class="right-info">
 											<b>Email</b>
-											<p>roshan4@gmail.com</p>
+											<p>saugatpandey@gmail.com</p>
 										</div>
 									</div>
 

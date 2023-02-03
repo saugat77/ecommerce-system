@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Home</title>	
+	<title>Home</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset ('assets/images/favicon.ico') }}">
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open%20Sans:300,400,400italic,600,600italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet">
@@ -20,8 +20,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" integrity="sha512-KRrxEp/6rgIme11XXeYvYRYY/x6XPGwk0RsIC6PyMRc072vj2tcjBzFmn939xzjeDhj0aDO7TDMd7Rbz3OEuBQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @livewireStyles
 </head>
-@livewireStyles
 <body class="home-page home-01 ">
 
 	<!-- mobile menu -->
@@ -49,7 +49,7 @@
 							@if(Route::has('login'))
 							@auth
 							@if(Auth::user()->utype === 'ADM')
-							
+
 								<ul>
 									<li class="menu-item lang-menu menu-item-has-children parent">
 										<a title="My Account" href="#"><i class="fa fa-user" aria-hidden="true"></i> Admin ({{Auth::user()->name}})</a>
@@ -79,15 +79,15 @@
 											<li class="menu-item" >
 												<a href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-submit').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 												<form id="logout-submit" method="POST" action="{{ route('logout')}}">
-													@csrf  
+													@csrf
 												</form>
 										</ul></li>
 										</ul>
-							
-						 
+
+
 							@else
 							<ul>
-									
+
 								<li class="menu-item lang-menu menu-item-has-children parent">
 									<a title="My Account" href="#"><i class="fa fa-user" aria-hidden="true"></i> My account ({{Auth::user()->name}})</a>
 									<ul class="submenu lang" >
@@ -96,17 +96,17 @@
 											<a title="all order" href=" {{route('user.orders')}} " ><i class="fa fa-history" aria-hidden="true"></i> My Orders</a>
 										</li>
 
-									
+
 
 										<li class="menu-item" >
 											<a href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-submit').submit();"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 											<form id="logout-submit" method="POST" action="{{ route('logout')}}">
-												@csrf  
+												@csrf
 											</form>
 										</ul>
 								         </li>
 									</ul>
-							
+
 						 @endif
 							@else
 							<ul>
@@ -114,7 +114,7 @@
 							  <li class="menu-item" ><a title="Register or Login" href="{{route('register')}}">Register</a></li></ul>
 							@endif
 						  @endif
-							
+
 						</div>
 					</div>
 				</div>
@@ -142,7 +142,7 @@
 					</div>
 				</div>
 
-			
+
 
 					<div class="primary-nav-section">
 						<div class="container">
@@ -164,7 +164,7 @@
 								</li>
 								<li class="menu-item">
 									<a href="/contact" class="link-term mercado-item-title">Contact Us</a>
-								</li>																	
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -241,7 +241,7 @@
 											<li>
 												<i class="fa fa-envelope" aria-hidden="true"></i>
 												<p class="contact-txt">Contact@contact.com</p>
-											</li>											
+											</li>
 										</ul>
 									</div>
 								</div>
@@ -416,10 +416,10 @@
 					<div class="coppy-right-item item-right">
 						<div class="wrap-nav horizontal-nav">
 							<ul>
-								<li class="menu-item"><a href="about-us.html" class="link-term">About us</a></li>								
+								<li class="menu-item"><a href="about-us.html" class="link-term">About us</a></li>
 								<li class="menu-item"><a href="privacy-policy.html" class="link-term">Privacy Policy</a></li>
 								<li class="menu-item"><a href="terms-conditions.html" class="link-term">Terms & Conditions</a></li>
-								<li class="menu-item"><a href="return-policy.html" class="link-term">Return Policy</a></li>								
+								<li class="menu-item"><a href="return-policy.html" class="link-term">Return Policy</a></li>
 							</ul>
 						</div>
 					</div>
@@ -427,8 +427,9 @@
 				</div>
 			</div>
 		</div>
+        @livewireScripts
 	</footer>
-	
+
 	<script src="{{ asset ('assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
 	<script src="{{ asset ('assets/js/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
 	<script src="{{ asset ('assets/js/bootstrap.min.js') }}"></script>
@@ -444,7 +445,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js" integrity="sha512-EnXkkBUGl2gBm/EIZEgwWpQNavsnBbeMtjklwAa7jLj60mJk932aqzXFmdPKCG6ge/i8iOCK0Uwl1Qp+S0zowg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!--tinyMCe installing-->
 	<script src="https://cdn.tiny.cloud/1/yls7nu5btwuygi1fb6255zrff2156roo0pe8njso5bnxwhkr/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-	@livewireScripts
 	@stack('scripts')
 </body>
 </html>

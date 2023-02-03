@@ -16,7 +16,7 @@
                <div class="alert alert-success">
                 <strong>Success</strong>{{session::get('success message')}}
                     </div>
-                  @endif                
+                  @endif
                 @if(Cart::instance('cart')-> count() >0)
                 <h3 class="box-title">Products Name</h3>
                 <ul class="products-cart">
@@ -31,9 +31,9 @@
                         <div class="price-field produtc-price"><p class="price">{{$item->model->regular_price}}</p></div>
                         <div class="quantity">
                             <div class="quantity-input">
-                                <input type="text" name="product-quatity" value="{{$item->qty}}" data-max="120" pattern="[0-9]*" >									
-                                <button class="btn btn-increase" button onClick="window.location.reload();"  wire:click.prevent="increaseQuantity('{{$item->rowId}}')"></button>
-                                <a class="btn btn-reduce" href="#" button onClick="window.location.reload();" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"></a>
+                                <input type="text" name="product-quatity" value="{{$item->qty}}" data-max="120" pattern="[0-9]*" >
+                                <button class="btn btn-increase" button  wire:click.prevent="increaseQuantity('{{$item->rowId}}')"></button>
+                                <a class="btn btn-reduce" href="#" button wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"></a>
                             </div>
                         </div>
                         <div class="price-field sub-total"><p class="price">${{$item->subtotal}}</p></div>
@@ -43,8 +43,8 @@
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                             </a>
                         </div>
-                    </li>   			                        
-                    @endforeach								
+                    </li>
+                    @endforeach
                 </ul>
                 @else
                 <p> Cart is empty</p>
@@ -60,12 +60,12 @@
                     <p class="summary-info total-info " ><span class="title">Total</span><b class="index">${{Cart::total()}}</b></p>
                 </div>
                 <div class="checkout-info">
-                   
+
                     <a class="btn btn-checkout" href="#" wire:click.prevent="checkout">Check out</a>
                     <a class="link-to-shop" href="/shop">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
                 </div>
                 <div class="update-clear">
-                    <a class="btn btn-clear" button onClick="window.location.reload();" href="product.cart" wire:click.prevent="destroyAll()">Clear Shopping Cart</a>
+                    <a class="btn btn-clear" button href="product.cart" wire:click.prevent="destroyAll()">Clear Shopping Cart</a>
                     <a class="btn btn-update" href="#">Update Shopping Cart</a>
                 </div>
             </div>

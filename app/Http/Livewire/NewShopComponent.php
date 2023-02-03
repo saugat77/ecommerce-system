@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Cart;
 use App\Models\Category;
 
-class ShopComponent extends Component
+class NewShopComponent extends Component
 {
     public $sorting;
     public $pagesize;
@@ -36,7 +36,6 @@ class ShopComponent extends Component
 
     public function addToWishlist($product_id,$product_name,$product_price)
    {
-
        Cart::instance('wishlist')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
         $this->emitTo('wishlist-count-component','refreshComponent');
 
@@ -79,7 +78,7 @@ class ShopComponent extends Component
             Cart::instance('cart')->store(Auth::user()->email);
         }
 
-        return view('livewire.shop-component',['products'=>$products,'categories'=>$categories])->layout('layouts.base');
+        return view('livewire.new-shop-component',['products'=>$products,'categories'=>$categories])->layout('layouts.base');
     }
 
 }
