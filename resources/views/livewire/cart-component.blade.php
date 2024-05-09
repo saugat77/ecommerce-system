@@ -28,6 +28,7 @@
                         <div class="product-name">
                             <a class="link-to-product" href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->model->name}}</a>
                         </div>
+                        {{-- @dd($item); --}}
                         <div class="price-field produtc-price"><p class="price">{{$item->model->regular_price}}</p></div>
                         <div class="quantity">
                             <div class="quantity-input">
@@ -35,6 +36,15 @@
                                 <button class="btn btn-increase" button  wire:click.prevent="increaseQuantity('{{$item->rowId}}')"></button>
                                 <a class="btn btn-reduce" href="#" button wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"></a>
                             </div>
+                            <script>
+                                document.addEventListener('livewire:load', function () {
+                                  // Listen for Livewire's 'quantityUpdated' event (you can name it whatever you want)
+                                  Livewire.on('quantityUpdated', function () {
+                                    // Reload the page after the quantity has been updated
+                                    location.reload();
+                                  });
+                                });
+                              </script>
                         </div>
                         <div class="price-field sub-total"><p class="price">${{$item->subtotal}}</p></div>
                         <div class="delete">
@@ -50,7 +60,6 @@
                 <p> Cart is empty</p>
                 @endif
             </div>
-
             <div class="summary">
                 <div class="order-summary">
                     <h4 class="title-box">Order Summary</h4>

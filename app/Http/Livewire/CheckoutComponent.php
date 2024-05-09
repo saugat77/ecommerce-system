@@ -13,8 +13,8 @@ use Livewire\Component;
 
 class CheckoutComponent extends Component
 {
-    
-    
+
+
     public $firstname;
     public $lastname;
     public $email;
@@ -28,7 +28,7 @@ class CheckoutComponent extends Component
     public $paymentmode;
     public $thankyou;
 
-   
+
 
     public function placeOrder()
     {
@@ -54,27 +54,27 @@ class CheckoutComponent extends Component
             $orderItem = new OrderItem();
             $orderItem->product_id = $item->id;
             $orderItem->order_id = $order->id;
-            // $orderItem->price = $item->price;
+            $orderItem->price = $item->price ?? 00;
             $orderItem->quantity = $item->qty;
             $orderItem->save();
         }
 
-        
+
         Cart::instance('cart')->destroy();
         session()->forget('checkout');
 
-      
+
     }
 
-   
+
     public function verifyForCheckout()
     {
-    
+
      if(!session()->get('checkout'))
         {
             return redirect()->route('product.cart');
         }
-       
+
     }
     public function render()
     {
