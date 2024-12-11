@@ -38,7 +38,7 @@ class ShopComponent extends Component
    {
        Cart::instance('wishlist')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
         $this->emitTo('wishlist-count-component','refreshComponent');
-        
+
     }
    public function removeFromWishlist($product_id)
     {
@@ -55,6 +55,7 @@ class ShopComponent extends Component
     use WithPagination;
     public function render()
     {
+
         if($this->sorting=='date')
         {
             $products=Product::whereBetween('regular_price',[$this->min_price,$this->max_price])->orderBy('created_at','DESC')->paginate($this->pagesize);
@@ -70,15 +71,15 @@ class ShopComponent extends Component
         else{
             $products=Product::paginate($this->pagesize);
         }
-        
+
         $categories = Category::all();
 
         if(Auth::check())
         {
             Cart::instance('cart')->store(Auth::user()->email);
         }
-      
+
         return view('livewire.shop-component',['products'=>$products,'categories'=>$categories])->layout('layouts.base');
     }
-    
+
 }
